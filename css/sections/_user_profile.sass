@@ -1,0 +1,80 @@
+#user_profile
+
+.upload
+	position: absolute
+	align-items: center
+	justify-content: center
+	background: white
+	border: 2px solid $grey
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	display: none
+	&.active
+		display: flex
+	.wrapper
+		padding: 100px 20px
+		position: relative
+		.close
+			position: absolute
+			top: 20px
+			right: 30px
+			font-size: 30px
+			cursor: pointer
+			color: $red
+
+	.form-upload
+		input
+			margin-bottom: 15px
+		button
+			padding: 10px 30px
+.profile
+	
+	width: 540px
+	margin: 0 auto 50px
+	display: flex
+	.user-face
+		width: 180px
+		height: 180px
+		margin-right: 20px
+		background:
+			size: cover
+			position: center
+			repeat: no-repeat
+		border-radius: 50%
+		cursor: pointer
+	.content
+		flex: 1
+		padding: 10px 0px
+		.desc-wrapper
+			margin-bottom: 20px
+		.name, .edit
+			display: inline-block
+		.name
+			font-size: 30px
+			margin-right: 20px
+		.edit
+			padding: 10px 20px
+			border: 2px solid $grey
+		.post-wrapper
+			display: flex
+			justify-content: space-between
+			.post span
+				margin-right: 10px
+
+.post-wrapper
+	display: flex
+	flex-wrap: wrap
+	.post
+		width: 23%
+		margin: 0px 1%
+		display: block
+		background:
+			size: cover
+			position: center
+			repeat: no-repeat
+		cursor: pointer
+		&:before
+			content: ""
+			display: block
+			padding-top: 100%
