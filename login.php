@@ -26,7 +26,8 @@ require_once "header.php";
 
 		if($login) {
 
-			redirect::to('user_profile.php');
+			redirect::to("timeline.php");
+			
 		} else {
 
 

@@ -147,13 +147,18 @@
 		}
 
 
-		public function get_profile_picture() {
+		public function get_profile_picture($user_id = false) {
+
 
 
 			if($this->exist()) {
 
+					if(!$user_id) {
 
-					$profile_pic = $this->db->get('profile_images', array('user_id', '=', $this->data()->id));
+						$user_id = $this->data()->id;
+					}
+
+					$profile_pic = $this->db->get('profile_images', array('user_id', '=', $user_id));
 
 					if($profile_pic->count()) {
 
@@ -185,6 +190,99 @@
 		}
 
 
+
+
+		public function search($search) {
+
+			$users = $this->db->get('users', array("username", "like", "%$search%"));
+
+			if($users->count()) {
+
+				return $users->result();
+			}
+
+			return false;
+		}
+
+
+
+
+
+		public function get_user_profile($user_id) {
+
+			$user = $this->db->get('users', array('id', '=', $user_id));
+
+			if($user->count()) {
+
+				return $user->first();
+			}
+
+			return false;
+		}
+
+
+
+		public function check_follow($fields) {
+
+				$sql = "select * from follow where user_id = ? and follower_id = ?";
+
+				$check = $this->db->query($sql, $fields);
+
+				if($check->count()) {
+
+					return true;
+				}
+
+				return false;
+		}
+
+		public function follow($fields) {
+
+			$check = $this->check_follow($fields);
+
+			if(!$check) {
+
+				//inert data inot followers table
+
+				$insert = $this->db->insert('follow', $fields);
+
+				if($insert) {
+
+					return true;
+				}
+
+				return false;
+			}
+
+
+		}
+
+
+		public function get_following($user_id) {
+
+
+			$sql = "select * from follow  
+
+			inner join users
+			on follow.follower_id = users.id
+
+			where follow.user_id = ?";
+
+			$fields = array(
+
+				'user_id' => $user_id
+
+			);
+
+			$user = $this->db->query($sql, $fields);
+
+			if($user->count()) {
+
+				return $user->result();
+			}
+
+			return false;
+		}
 
 
 

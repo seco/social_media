@@ -16,55 +16,35 @@ require_once "header.php";
 
 	if(input::exist()) {
 
-		$validation = new Validation();
-
-		$post = new Post();
-
-		$fields = array(
-
-			'user_id' => $user->data()->id,
-			'post_file' => file::upload(input::get('file')),
-			'caption' => input::get('caption'),
-			"post_date" => date("Y-m-d H:i:s")
-		);
 
 
+		$login = $user->login(input::get('email'), input::get('password'));
 
-		$post = $post->create_post($fields);
+		if($login) {
 
-		if($post) {
+			redirect::to('timeline.php');
+		} else {
 
-			redirect::to('user_profile.php');
+
+			?>
+
+					<p class="error">Invalid username/password Combination</p>
+
+			<?php 
 		}
-
-
 	}
 
 
 	if($user->logged_in()) {
 
 
-		?>
-
-		<div class="post-form">
-
-			<form action="" method='post' class='post-form' enctype="multipart/form-data">
-				<input type="file" name='file'>
-				<input type="text" name='caption' placeholder="caption">
-				<button type='submit' name='submit'>submit</button>
-
-			</form>
-		</div>
-
-
-		<?php 
-
+		redirect::to('timeline.php');
 
 	} else {
 
 		?>
 
-		<h1>Escogram</h1>
+		<h1 class='title'>Escogram</h1>
 
 
 

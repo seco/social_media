@@ -37,6 +37,7 @@ $user = new User;
 
 					<a href="user_profile">Profile</a>
 					<a href="notifications">Notifications</a>
+					<a href="search.php">Search</a>
 					<a href="following.php">Following</a>
 					<a href="followers.php">Followers</a>
 					<a href="logout">Logout</a>
